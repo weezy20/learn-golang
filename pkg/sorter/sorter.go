@@ -1,15 +1,20 @@
 package sorter
 
-import "golang.org/x/exp/constraints"
+import (
+	"cmp"
+)
+
+// This package would offer almost the same constraint as cmp.Ordered
+// import "golang.org/x/exp/constraints"
 
 // Define an interface sorter that is implemented by each type of sorter.
 // This interface has one method, sort() that takes in a vector of generic type T and sorts it
-type Sorter[T constraints.Ordered] interface {
+type Sorter[T cmp.Ordered] interface {
 	Sort([]T)
 }
 
 // Define a struct that implements the Sorter interface
-type BinarySort[T constraints.Ordered] struct{}
+type BinarySort[T cmp.Ordered] struct{}
 
 // Implement the Sorter interface for BinarySort that takes a vector of generic type T and sorts it
 // Go interfaces are implemented implicitly, there's no explicit declaration of intent
