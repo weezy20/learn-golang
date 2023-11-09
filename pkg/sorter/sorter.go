@@ -14,11 +14,11 @@ type Sorter[T cmp.Ordered] interface {
 }
 
 // Define a struct that implements the Sorter interface
-type BinarySort[T cmp.Ordered] struct{}
+type BubbleSort[T cmp.Ordered] struct{}
 
-// Implement the Sorter interface for BinarySort that takes a vector of generic type T and sorts it
+// Implement the Sorter interface for BubbleSort that takes a vector of generic type T and sorts it
 // Go interfaces are implemented implicitly, there's no explicit declaration of intent
-func (b *BinarySort[T]) Sort(v []T) {
+func (b *BubbleSort[T]) Sort(v []T) {
 	// implement binary sort on v
 	n := len(v)
 	for i := 0; i < n-1; i++ {
@@ -27,5 +27,20 @@ func (b *BinarySort[T]) Sort(v []T) {
 				v[j], v[j+1] = v[j+1], v[j]
 			}
 		}
+	}
+}
+
+type InsertionSort[T cmp.Ordered] struct{}
+
+func (i *InsertionSort[T]) Sort(v []T) {
+	n := len(v)
+	for i := 1; i < n; i++ {
+		key := v[i]
+		j := i - 1
+		for j >= 0 && v[j] > key {
+			v[j+1] = v[j]
+			j = j - 1
+		}
+		v[j+1] = key
 	}
 }
